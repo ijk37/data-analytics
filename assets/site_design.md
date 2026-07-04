@@ -196,18 +196,12 @@ Same idempotent pre-build fixer pattern as network-systems, adapted paths: `01-n
 Identical workflow to network-systems: `.github/workflows/deploy.yml` builds on push to `main` and deploys via GitHub Pages (`Settings → Pages → Source = GitHub Actions`). The custom domain `ijk37.com` cascades from the user-site repo to every project site, so this repo is automatically served at `https://ijk37.com/data-analytics/` with no `CNAME` file needed here.
 ### Cross-site hub navigation
 
-Each course homepage starts with a right-aligned `.resource-hub-nav` button group immediately below the intro copy and before the course card grid:
+Each course site injects a vertical `.resource-sidebar-hub` button group into the MkDocs Material right sidebar, below the page table of contents. This keeps the course homepage card grid focused on course sections while still giving every page quick access to the portfolio home and the two learning-resource hubs.
 
-```markdown
-<div class="resource-hub-nav" markdown>
+The buttons are created by `assets/javascripts/extra.js` on page load and on Material instant-navigation updates:
 
-[:octicons-home-16: Home](https://ijk37.com/){ .hub-nav-button .hub-nav-home }
+- Home → `https://ijk37.com/`
+- Data Science & AI → `https://ijk37.com/data-science-ai/`
+- Cyber Security → `https://ijk37.com/cyber-security/`
 
-[:octicons-graph-16: Data Science & AI](https://ijk37.com/data-science-ai/){ .hub-nav-button .hub-nav-dsai }
-
-[:octicons-shield-lock-16: Cyber Security](https://ijk37.com/cyber-security/){ .hub-nav-button .hub-nav-cyber }
-
-</div>
-```
-
-The button styling lives in `assets/stylesheets/extra.css`. Keep the buttons as Markdown links inside a `markdown`-enabled div so MkDocs Material processes the Octicons and `attr_list` classes consistently. The Home button uses the local course theme color; the two hub buttons use the portfolio hub colors: Data Science & AI `#34526b`, Cyber Security `#b4122e`.
+The styling lives in `assets/stylesheets/extra.css`. The Home button uses the local course theme color; the two hub buttons use the portfolio hub colors: Data Science & AI `#34526b`, Cyber Security `#b4122e`.

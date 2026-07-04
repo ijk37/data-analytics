@@ -152,55 +152,55 @@
     min-height: 4.25rem;
   }
 }
-/* Learning resource hub navigation */
-.resource-hub-nav {
+/* Learning resource hub navigation: right rail */
+.resource-sidebar-hub {
+  border-top: 1px solid var(--md-default-fg-color--lightest);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.45rem;
-  margin: -0.2rem 0 1.25rem;
+  flex-direction: column;
+  gap: 0.42rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
 }
 
-.resource-hub-nav > p {
-  display: flex;
-  margin: 0;
+.resource-sidebar-hub__title {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  margin-bottom: 0.1rem;
+  text-transform: uppercase;
 }
 
-.md-typeset .hub-nav-button {
+.resource-sidebar-hub__button {
   align-items: center;
   border: 1px solid var(--course-hub-color, var(--md-primary-fg-color));
-  border-radius: 999px;
+  border-radius: 0.45rem;
   color: var(--course-hub-color, var(--md-primary-fg-color));
-  display: inline-flex;
-  font-size: 0.78rem;
+  display: flex;
+  font-size: 0.68rem;
   font-weight: 800;
-  gap: 0.35rem;
-  line-height: 1.2;
-  padding: 0.42rem 0.72rem;
+  justify-content: space-between;
+  line-height: 1.25;
+  padding: 0.42rem 0.5rem;
   text-decoration: none;
   transition: background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
-.md-typeset .hub-nav-button:hover {
+.resource-sidebar-hub__button::after {
+  content: "\2192";
+  flex-shrink: 0;
+  font-weight: 900;
+  margin-left: 0.45rem;
+}
+
+.resource-sidebar-hub__button:hover {
   background-color: color-mix(in srgb, var(--course-hub-color, var(--md-primary-fg-color)) 10%, transparent);
-  box-shadow: 0 0.35rem 0.85rem color-mix(in srgb, var(--course-hub-color, var(--md-primary-fg-color)) 16%, transparent);
+  box-shadow: 0 0.25rem 0.65rem color-mix(in srgb, var(--course-hub-color, var(--md-primary-fg-color)) 15%, transparent);
+  text-decoration: none;
   transform: translateY(-1px);
 }
 
-.md-typeset .hub-nav-home { --course-hub-color: var(--md-primary-fg-color); }
-.md-typeset .hub-nav-dsai { --course-hub-color: #34526b; }
-.md-typeset .hub-nav-cyber { --course-hub-color: #b4122e; }
-@media screen and (max-width: 44.9375em) {
-  .resource-hub-nav {
-    justify-content: stretch;
-  }
-
-  .resource-hub-nav > p {
-    flex: 1 1 100%;
-  }
-
-  .md-typeset .hub-nav-button {
-    flex: 1 1 100%;
-    justify-content: center;
-  }
-}
+.resource-sidebar-hub__home { --course-hub-color: var(--md-primary-fg-color); }
+.resource-sidebar-hub__dsai { --course-hub-color: #34526b; }
+.resource-sidebar-hub__cyber { --course-hub-color: #b4122e; }
