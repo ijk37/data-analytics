@@ -1,4 +1,4 @@
-# Site Design Blueprint
+﻿# Site Design Blueprint
 
 How this repository is structured so that **one set of Markdown files works two ways at once**:
 
@@ -194,3 +194,20 @@ Same idempotent pre-build fixer pattern as network-systems, adapted paths: `01-n
 ## 8. Deployment
 
 Identical workflow to network-systems: `.github/workflows/deploy.yml` builds on push to `main` and deploys via GitHub Pages (`Settings → Pages → Source = GitHub Actions`). The custom domain `ijk37.com` cascades from the user-site repo to every project site, so this repo is automatically served at `https://ijk37.com/data-analytics/` with no `CNAME` file needed here.
+### Cross-site hub navigation
+
+Each course homepage starts with a right-aligned `.resource-hub-nav` button group immediately below the intro copy and before the course card grid:
+
+```markdown
+<div class="resource-hub-nav" markdown>
+
+[:octicons-home-16: Home](https://ijk37.com/){ .hub-nav-button .hub-nav-home }
+
+[:octicons-graph-16: Data Science & AI](https://ijk37.com/data-science-ai/){ .hub-nav-button .hub-nav-dsai }
+
+[:octicons-shield-lock-16: Cyber Security](https://ijk37.com/cyber-security/){ .hub-nav-button .hub-nav-cyber }
+
+</div>
+```
+
+The button styling lives in `assets/stylesheets/extra.css`. Keep the buttons as Markdown links inside a `markdown`-enabled div so MkDocs Material processes the Octicons and `attr_list` classes consistently. The Home button uses the local course theme color; the two hub buttons use the portfolio hub colors: Data Science & AI `#34526b`, Cyber Security `#b4122e`.

@@ -1,4 +1,4 @@
-/* ── Data Analytics · slate blue & emerald theme ─────────────────────────── */
+﻿/* ── Data Analytics · slate blue & emerald theme ─────────────────────────── */
 
 :root {
   --da-slate: #34526b;
@@ -150,5 +150,57 @@
 
   .md-typeset .da-card {
     min-height: 4.25rem;
+  }
+}
+/* Learning resource hub navigation */
+.resource-hub-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  margin: -0.2rem 0 1.25rem;
+}
+
+.resource-hub-nav > p {
+  display: flex;
+  margin: 0;
+}
+
+.md-typeset .hub-nav-button {
+  align-items: center;
+  border: 1px solid var(--course-hub-color, var(--md-primary-fg-color));
+  border-radius: 999px;
+  color: var(--course-hub-color, var(--md-primary-fg-color));
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 800;
+  gap: 0.35rem;
+  line-height: 1.2;
+  padding: 0.42rem 0.72rem;
+  text-decoration: none;
+  transition: background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.md-typeset .hub-nav-button:hover {
+  background-color: color-mix(in srgb, var(--course-hub-color, var(--md-primary-fg-color)) 10%, transparent);
+  box-shadow: 0 0.35rem 0.85rem color-mix(in srgb, var(--course-hub-color, var(--md-primary-fg-color)) 16%, transparent);
+  transform: translateY(-1px);
+}
+
+.md-typeset .hub-nav-home { --course-hub-color: var(--md-primary-fg-color); }
+.md-typeset .hub-nav-dsai { --course-hub-color: #34526b; }
+.md-typeset .hub-nav-cyber { --course-hub-color: #b4122e; }
+@media screen and (max-width: 44.9375em) {
+  .resource-hub-nav {
+    justify-content: stretch;
+  }
+
+  .resource-hub-nav > p {
+    flex: 1 1 100%;
+  }
+
+  .md-typeset .hub-nav-button {
+    flex: 1 1 100%;
+    justify-content: center;
   }
 }
