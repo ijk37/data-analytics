@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Data Analytics</title>
+  <rect width="64" height="64" rx="12" fill="#34526B"/>
+  <path fill="#1E9E75" d="M16 44h6v-8h-6v8Zm12 0h6V26h-6v18Zm12 0h6V16h-6v28Z"/>
+  <path fill="none" stroke="#3FC496" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M16 34l12-8 12 6 6-12"/>
+</svg>

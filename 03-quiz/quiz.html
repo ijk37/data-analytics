@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Analytics — Quiz</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0D161C;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    #app { width: 100%; max-width: 960px; }
+
+    /* ── Two-column layout: quiz + sidebar ── */
+    .quiz-body {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .quiz-main { flex: 1; min-width: 0; }
+
+    .quiz-side {
+      width: 220px;
+      flex-shrink: 0;
+      background: #17242C;
+      border: 1px solid #2A3F4E;
+      border-radius: 14px;
+      padding: 1rem;
+      position: sticky;
+      top: 1rem;
+    }
+
+    .timer {
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-align: center;
+      color: #f1f5f9;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 1px;
+    }
+    .timer-label {
+      text-align: center;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      margin-bottom: 0.6rem;
+    }
+    .side-summary {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-bottom: 0.75rem;
+    }
+
+    .qnav-title {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      margin-bottom: 0.4rem;
+    }
+    .qnav {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.35rem;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+    .qnav button {
+      aspect-ratio: 1 / 1;
+      border-radius: 6px;
+      border: 1.5px solid #2A3F4E;
+      background: #101B22;
+      color: #94a3b8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .qnav button:hover { border-color: #1E9E75; }
+    .qnav button.answered {
+      background: #0f2a1a;
+      border-color: #22c55e;
+      color: #86efac;
+    }
+    .qnav button.current {
+      border-color: #4A7196;
+      box-shadow: 0 0 0 1px #4A7196;
+      color: #fff;
+    }
+
+    .side-finish { width: 100%; margin-top: 0.9rem; }
+
+    @media (max-width: 760px) {
+      .quiz-body { flex-direction: column; }
+      .quiz-side { width: 100%; position: static; }
+      .qnav { max-height: 200px; }
+    }
+
+    /* ── Header ── */
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .back-btn {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.15s;
+    }
+    .back-btn:hover { color: #94a3b8; }
+
+    .topic-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #34D399;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: auto;
+    }
+
+    /* ── Progress ── */
+    .progress-bar-wrap {
+      background: #17242C;
+      border-radius: 99px;
+      height: 6px;
+      margin-bottom: 0.6rem;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #34526B, #1E9E75);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Question card ── */
+    .question-card {
+      background: #17242C;
+      border: 1px solid #2A3F4E;
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.55;
+      color: #f1f5f9;
+      margin-bottom: 1.5rem;
+    }
+
+    .options { display: flex; flex-direction: column; gap: 0.65rem; }
+
+    .option {
+      background: #101B22;
+      border: 1.5px solid #2A3F4E;
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      cursor: pointer;
+      font-size: 0.93rem;
+      line-height: 1.45;
+      transition: border-color 0.12s, background 0.12s;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .option:hover:not(.locked) {
+      border-color: #34526B;
+      background: #1F323D;
+    }
+
+    .option .opt-letter {
+      font-weight: 700;
+      color: #34D399;
+      min-width: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .option.correct {
+      border-color: #22c55e;
+      background: #052e16;
+    }
+    .option.correct .opt-letter { color: #22c55e; }
+
+    .option.wrong {
+      border-color: #ef4444;
+      background: #2a0a0a;
+    }
+    .option.wrong .opt-letter { color: #ef4444; }
+
+    .option.reveal {
+      border-color: #22c55e;
+      background: #052e16;
+      opacity: 0.7;
+    }
+    .option.reveal .opt-letter { color: #22c55e; }
+
+    /* ── Explanation ── */
+    .explanation {
+      margin-top: 1.25rem;
+      padding: 1rem 1.1rem;
+      background: #101B22;
+      border-left: 3px solid #34526B;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      display: none;
+    }
+    .explanation.show { display: block; }
+    .explanation strong { color: #cbd5e1; }
+
+    /* ── Buttons ── */
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .btn-outline:disabled { opacity: 0.35; cursor: default; }
+
+    .btn {
+      background: #34526B;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: #4A7196; }
+    .btn:disabled { background: #2A3F4E; color: #475569; cursor: default; }
+
+    /* ── Results screen ── */
+    #results { display: none; }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 6px solid #34526B;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .score-circle .score-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #f1f5f9;
+      line-height: 1;
+    }
+
+    .score-circle .score-denom {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .result-title {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 0.4rem;
+    }
+
+    .result-sub {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .review-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .review-item {
+      background: #17242C;
+      border: 1px solid #2A3F4E;
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .review-item .review-q {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-item .review-your {
+      font-size: 0.83rem;
+      color: #ef4444;
+      margin-bottom: 0.2rem;
+    }
+
+    .review-item .review-correct {
+      font-size: 0.83rem;
+      color: #22c55e;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-item .review-good {
+      font-size: 0.83rem;
+      color: #22c55e;
+      margin-bottom: 0.2rem;
+    }
+
+    .review-item .review-explain {
+      font-size: 0.82rem;
+      color: #64748b;
+      line-height: 1.55;
+      border-top: 1px solid #2A3F4E;
+      padding-top: 0.5rem;
+    }
+
+    .review-item.rev-correct { border-left: 3px solid #22c55e; }
+    .review-item.rev-wrong   { border-left: 3px solid #ef4444; }
+    .review-item.rev-skip    { border-left: 3px solid #64748b; }
+
+    .result-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #34526B;
+      color: #4A7196;
+      border-radius: 8px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      text-decoration: none;
+    }
+    .btn-outline:hover { background: #1F323D; }
+
+    .all-correct .score-circle { border-color: #22c55e; }
+    .all-correct .score-num { color: #22c55e; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Quiz screen -->
+  <div id="quiz">
+    <div class="quiz-header">
+      <a class="back-btn" href="index.html">← All Chapters</a>
+      <span class="topic-label" id="topic-label"></span>
+    </div>
+
+    <div class="quiz-body">
+      <div class="quiz-main">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="progress-text" id="progress-text"></div>
+
+        <div class="question-card">
+          <div class="question-text" id="question-text"></div>
+          <div class="options" id="options"></div>
+          <div class="explanation" id="explanation"></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-outline" id="back-btn" disabled>← Back</button>
+          <button class="btn" id="next-btn">Skip →</button>
+        </div>
+      </div>
+
+      <aside class="quiz-side">
+        <div class="timer" id="timer">00:00</div>
+        <div class="timer-label">Elapsed</div>
+        <div class="side-summary" id="side-summary"></div>
+        <div class="qnav-title">Questions</div>
+        <div class="qnav" id="qnav"></div>
+        <button class="btn side-finish" id="finish-btn">Finish ▸</button>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Results screen -->
+  <div id="results">
+    <div class="quiz-header">
+      <a class="back-btn" href="index.html">← All Chapters</a>
+      <span class="topic-label" id="results-label"></span>
+    </div>
+
+    <div class="question-card" id="score-card">
+      <div class="score-circle" id="score-circle">
+        <span class="score-num" id="score-num"></span>
+        <span class="score-denom" id="score-denom"></span>
+      </div>
+      <div class="result-title" id="result-title"></div>
+      <div class="result-sub" id="result-sub"></div>
+
+      <div class="review-list" id="review-list"></div>
+
+      <div class="result-actions">
+        <button class="btn" onclick="restartQuiz()">↺ Retry</button>
+        <a class="btn-outline" href="index.html">All Chapters</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="data-01.js"></script>
+<script src="data-02.js"></script>
+<script src="data-03.js"></script>
+<script src="data-04.js"></script>
+<script src="data-05.js"></script>
+<script src="data-06.js"></script>
+<script src="data-07.js"></script>
+<script src="data-08.js"></script>
+<script>
+  // ── Init ──────────────────────────────────────────────────────────────────
+  const params = new URLSearchParams(location.search);
+  const topicId = params.get("topic");
+
+  const topic = TOPICS.find(t => t.id === topicId);
+  const questions = QUESTIONS[topicId];
+
+  if (!topic || !questions || questions.length === 0) {
+    document.body.innerHTML = `<div style="text-align:center;padding:4rem;color:#94a3b8">
+      Chapter not found. <a href="index.html" style="color:#34526B">← Go back</a></div>`;
+    throw new Error("Topic not found");
+  }
+
+  document.title = `Quiz — ${topic.title}`;
+  document.getElementById("topic-label").textContent = topic.title;
+  document.getElementById("results-label").textContent = topic.title;
+
+  // How many questions this attempt shows (random subset of the pool).
+  const urlN = parseInt(params.get("n"), 10);
+  const attemptSize = (urlN > 0)
+    ? Math.min(urlN, questions.length)
+    : attemptSizeFor(topicId, questions.length);
+
+  // Shuffle a question's options so the correct answer isn't always in the
+  // same position; remap the answer index to match the new order.
+  function shuffleOptions(q) {
+    const order = q.options.map((_, i) => i).sort(() => Math.random() - 0.5);
+    return {
+      q: q.q,
+      options: order.map(i => q.options[i]),
+      answer: order.indexOf(q.answer),
+      explain: q.explain,
+    };
+  }
+
+  // Pick a fresh random subset from the full pool, options shuffled, per attempt.
+  function pickQuestions() {
+    return [...questions]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, attemptSize)
+      .map(shuffleOptions);
+  }
+
+  const LETTERS = ["A", "B", "C", "D", "E", "F"];
+  let shuffled = pickQuestions();
+  let current = 0;
+  let userAnswers = new Array(shuffled.length).fill(null);
+
+  // ── Timer (counts up) ─────────────────────────────────────────────────────
+  let elapsed = 0;
+  let timerId = null;
+  function fmtTime(s) {
+    const m = Math.floor(s / 60), ss = s % 60;
+    return String(m).padStart(2, "0") + ":" + String(ss).padStart(2, "0");
+  }
+  function startTimer() {
+    stopTimer();
+    elapsed = 0;
+    document.getElementById("timer").textContent = fmtTime(0);
+    timerId = setInterval(() => {
+      elapsed++;
+      document.getElementById("timer").textContent = fmtTime(elapsed);
+    }, 1000);
+  }
+  function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
+
+  // ── Sidebar question navigator ────────────────────────────────────────────
+  function renderNav() {
+    const nav = document.getElementById("qnav");
+    nav.innerHTML = "";
+    shuffled.forEach((q, i) => {
+      const b = document.createElement("button");
+      b.textContent = i + 1;
+      if (userAnswers[i] !== null) b.classList.add("answered");
+      if (i === current) b.classList.add("current");
+      b.title = userAnswers[i] !== null ? `Question ${i + 1} — answered` : `Question ${i + 1} — not answered`;
+      b.addEventListener("click", () => { current = i; render(); });
+      nav.appendChild(b);
+    });
+    const ans = userAnswers.filter(a => a !== null).length;
+    document.getElementById("side-summary").textContent =
+      `${ans} answered · ${shuffled.length - ans} left`;
+  }
+
+  // ── Render question (restores answered state when navigating back) ─────────
+  function render() {
+    const q = shuffled[current];
+    const chosen = userAnswers[current];
+    const answered = chosen !== null;
+
+    // Progress
+    document.getElementById("progress-fill").style.width =
+      `${(current / shuffled.length) * 100}%`;
+    document.getElementById("progress-text").textContent =
+      `Question ${current + 1} of ${shuffled.length}`;
+
+    // Question
+    document.getElementById("question-text").textContent = q.q;
+
+    // Options
+    const optContainer = document.getElementById("options");
+    optContainer.innerHTML = "";
+    q.options.forEach((text, i) => {
+      const div = document.createElement("div");
+      div.className = "option";
+      div.innerHTML = `<span class="opt-letter">${LETTERS[i]}</span><span>${text}</span>`;
+      if (answered) {
+        div.classList.add("locked");
+        if (i === chosen && chosen === q.answer) div.classList.add("correct");
+        else if (i === chosen) div.classList.add("wrong");
+        else if (i === q.answer) div.classList.add("reveal");
+      } else {
+        div.addEventListener("click", () => selectAnswer(i));
+      }
+      optContainer.appendChild(div);
+    });
+
+    // Explanation (only after answering)
+    const exp = document.getElementById("explanation");
+    if (answered) {
+      exp.innerHTML = `<strong>Explanation:</strong> ${q.explain}`;
+      exp.classList.add("show");
+    } else {
+      exp.classList.remove("show");
+      exp.innerHTML = "";
+    }
+
+    // Buttons
+    document.getElementById("back-btn").disabled = current === 0;
+    const nextBtn = document.getElementById("next-btn");
+    const last = current === shuffled.length - 1;
+    nextBtn.textContent = last ? "See Results" : (answered ? "Next →" : "Skip →");
+
+    renderNav();
+  }
+
+  // ── Select answer ─────────────────────────────────────────────────────────
+  function selectAnswer(chosen) {
+    if (userAnswers[current] !== null) return; // already answered
+    userAnswers[current] = chosen;
+    render();                                   // re-render to lock + reveal
+  }
+
+  // ── Navigation: Back / Skip / Next / Finish ───────────────────────────────
+  document.getElementById("back-btn").addEventListener("click", () => {
+    if (current > 0) { current--; render(); }
+  });
+  document.getElementById("next-btn").addEventListener("click", () => {
+    if (current < shuffled.length - 1) { current++; render(); }
+    else showResults();
+  });
+  document.getElementById("finish-btn").addEventListener("click", () => {
+    const left = userAnswers.filter(a => a === null).length;
+    if (left > 0 && !confirm(`You have ${left} unanswered question(s). Finish and submit now?`)) return;
+    showResults();
+  });
+
+  // ── Results ───────────────────────────────────────────────────────────────
+  function showResults() {
+    stopTimer();
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("results").style.display = "block";
+
+    const total = shuffled.length;
+    const score = shuffled.reduce((s, q, i) => s + (userAnswers[i] === q.answer ? 1 : 0), 0);
+    const answeredCount = userAnswers.filter(a => a !== null).length;
+    const pct = Math.round((score / total) * 100);
+
+    document.getElementById("score-num").textContent = score;
+    document.getElementById("score-denom").textContent = `/ ${total}`;
+
+    let title, sub;
+    if (pct === 100) {
+      title = "Perfect Score! 🎉";
+      sub = "Flawless. You know this chapter cold.";
+      document.getElementById("score-card").classList.add("all-correct");
+    } else if (pct >= 80) {
+      title = "Great Work! 👏";
+      sub = `${pct}% — solid understanding. Review below.`;
+    } else if (pct >= 60) {
+      title = "Getting There 💪";
+      sub = `${pct}% — re-read the notes and try again.`;
+    } else {
+      title = "Keep Studying 📖";
+      sub = `${pct}% — go back to the notes, then retry.`;
+    }
+    if (answeredCount < total) sub += ` · ${total - answeredCount} skipped`;
+    sub += ` · ⏱ ${fmtTime(elapsed)}`;
+
+    document.getElementById("result-title").textContent = title;
+    document.getElementById("result-sub").textContent = sub;
+
+    // Full review — every question: your answer, correct answer, explanation
+    const reviewList = document.getElementById("review-list");
+    reviewList.innerHTML =
+      `<p style="font-size:0.75rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">Review — all ${total} questions</p>`;
+
+    shuffled.forEach((q, i) => {
+      const chosen = userAnswers[i];
+      const isCorrect = chosen === q.answer;
+      const div = document.createElement("div");
+      div.className = "review-item " + (chosen === null ? "rev-skip" : isCorrect ? "rev-correct" : "rev-wrong");
+
+      let yourLine;
+      if (chosen === null) {
+        yourLine = `<div class="review-your">— Not answered</div>`;
+      } else if (isCorrect) {
+        yourLine = `<div class="review-good">✓ Your answer: ${LETTERS[chosen]}. ${q.options[chosen]}</div>`;
+      } else {
+        yourLine = `<div class="review-your">✗ Your answer: ${LETTERS[chosen]}. ${q.options[chosen]}</div>`;
+      }
+      const correctLine = isCorrect ? "" :
+        `<div class="review-correct">✓ Correct: ${LETTERS[q.answer]}. ${q.options[q.answer]}</div>`;
+
+      div.innerHTML = `
+        <div class="review-q">Q${i + 1}: ${q.q}</div>
+        ${yourLine}
+        ${correctLine}
+        <div class="review-explain">${q.explain}</div>`;
+      reviewList.appendChild(div);
+    });
+  }
+
+  // ── Retry ─────────────────────────────────────────────────────────────────
+  function restartQuiz() {
+    current = 0;
+    shuffled = pickQuestions();               // new random subset each retry
+    userAnswers = new Array(shuffled.length).fill(null);
+    document.getElementById("results").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    document.getElementById("score-card").classList.remove("all-correct");
+    startTimer();
+    render();
+  }
+
+  // ── Start ─────────────────────────────────────────────────────────────────
+  startTimer();
+  render();
+</script>
+</body>
+</html>

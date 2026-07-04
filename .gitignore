@@ -1,0 +1,9 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# MkDocs build output
+_site/
+/site/

@@ -1,0 +1,191 @@
+site_name: Data Analytics
+site_description: University-level data analytics course notes, quizzes, exercises, and projects in Python, R, and Excel.
+site_author: Jahid
+site_url: https://ijk37.com/data-analytics/
+
+repo_name: ijk37/data-analytics
+repo_url: https://github.com/ijk37/data-analytics
+edit_uri: edit/main/
+
+docs_dir: .
+site_dir: ../data-analytics-site
+use_directory_urls: false
+exclude_docs: |
+  mkdocs.yml
+  requirements.txt
+  .gitignore
+  .claude/**
+  .git/**
+  .venv/**
+  05-resources/**
+  !05-resources/README.md
+  04-projects/**
+  !04-projects/README.md
+  !04-projects/*/README.md
+  tools/**
+  assets/site_design.md
+  01-notes.md
+  02-exercises.md
+  03-quiz.md
+  04-projects.md
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/images/data-logo.svg
+  favicon: assets/images/favicon.svg
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+
+plugins:
+  - same-dir
+  - search
+  - callouts
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.blocks.caption
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra_javascript:
+  - assets/javascripts/extra.js
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ijk37/data-analytics
+      name: GitHub repository
+
+not_in_nav: |
+  README.md
+
+nav:
+  - Home: index.md
+  - Notes:
+      - Overview: 01-notes/README.md
+      - "Ch01: Data & Attribute Types": 01-notes/01-data-analytics-introduction.md
+      - "Ch02: Descriptive Statistics": 01-notes/02-descriptive-statistics.md
+      - "Ch03: Multivariate Analysis": 01-notes/03-descriptive-multivariate-analysis.md
+      - "Ch04: Data Quality & Preprocessing": 01-notes/04-data-quality-and-preprocessing.md
+      - "Ch05: Clustering": 01-notes/05-clustering.md
+      - "Ch06: Frequent Pattern Mining": 01-notes/06-frequent-pattern-mining.md
+      - "Ch07: Classification": 01-notes/07-classification.md
+      - "Ch08: Summary & Cheat Sheet": 01-notes/08-summary.md
+  - Exercises:
+      - Overview: 02-exercises/README.md
+      - "Ch01 Exercise": 02-exercises/01-exercise.md
+      - "Ch02 Exercise": 02-exercises/02-exercise.md
+      - "Ch03 Exercise": 02-exercises/03-exercise.md
+      - "Ch04 Exercise": 02-exercises/04-exercise.md
+      - "Ch05 Exercise": 02-exercises/05-exercise.md
+      - "Ch06 Exercise": 02-exercises/06-exercise.md
+      - "Ch07 Exercise": 02-exercises/07-exercise.md
+      - "Ch08 Mixed Review": 02-exercises/08-exercise.md
+  - Quiz: 03-quiz/index.html
+  - Projects:
+      - Overview: 04-projects/README.md
+      - "Module 01: Introduction":
+          - "Attribute Auditor": 04-projects/01-project-01/README.md
+          - "Dataset Type Explorer": 04-projects/01-project-02/README.md
+          - "Attribute Scale Exercises": 04-projects/01-project-03/README.md
+      - "Module 02: Descriptive Statistics":
+          - "Frequency Table Builder": 04-projects/02-project-01/README.md
+          - "Location & Dispersion Explorer": 04-projects/02-project-02/README.md
+          - "Distribution Visualizer": 04-projects/02-project-03/README.md
+          - "Bivariate Quantitative Analyzer": 04-projects/02-project-04/README.md
+          - "Categorical Relationship Analyzer": 04-projects/02-project-05/README.md
+          - "Chapter 2 Exercise Solutions": 04-projects/02-project-06/README.md
+      - "Module 03: Multivariate Analysis":
+          - "Multivariate Statistics Explorer": 04-projects/03-project-01/README.md
+          - "Multivariate Visualization": 04-projects/03-project-02/README.md
+          - "Correlation & Heatmap Analysis": 04-projects/03-project-03/README.md
+          - "Frequency Tables & Mosaic Plots": 04-projects/03-project-04/README.md
+      - "Module 04: Data Quality & Preprocessing":
+          - "Data Quality Auditor": 04-projects/04-project-01/README.md
+          - "Discretization & Encoding": 04-projects/04-project-02/README.md
+          - "Normalization, Distance & Sampling": 04-projects/04-project-03/README.md
+          - "Data Transformation": 04-projects/04-project-04/README.md
+      - "Module 05: Clustering":
+          - "Distance Measures": 04-projects/05-project-01/README.md
+          - "K-Means Clustering": 04-projects/05-project-02/README.md
+          - "Hierarchical & Density-Based Clustering": 04-projects/05-project-03/README.md
+      - "Module 06: Frequent Pattern Mining":
+          - "Itemsets and Association Rules": 04-projects/06-project-01/README.md
+          - "FP-Growth and Pattern Types": 04-projects/06-project-02/README.md
+          - "Pattern Mining with mlxtend / arules": 04-projects/06-project-03/README.md
+      - "Module 07: Classification":
+          - "Decision Trees": 04-projects/07-project-01/README.md
+          - "k-NN and Naive Bayes": 04-projects/07-project-02/README.md
+          - "Model Evaluation": 04-projects/07-project-03/README.md
+      - "Module 08: Final Projects (Capstones)":
+          - "End-to-End Data Pipeline": 04-projects/08-project-01/README.md
+          - "Market Basket & Customer Segmentation": 04-projects/08-project-02/README.md
+          - "Predictive Analytics Classification Study": 04-projects/08-project-03/README.md
+          - "Iris Complete Walkthrough": 04-projects/08-project-04/README.md
+          - "Student Performance Predictor": 04-projects/08-project-05/README.md
+          - "Retail Sales Analytics": 04-projects/08-project-06/README.md
+          - "Comprehensive Course Capstone": 04-projects/08-project-07/README.md
+  - "Resources": 05-resources/README.md

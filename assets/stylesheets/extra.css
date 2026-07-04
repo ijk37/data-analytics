@@ -1,0 +1,154 @@
+/* ── Data Analytics · slate blue & emerald theme ─────────────────────────── */
+
+:root {
+  --da-slate: #34526b;
+  --da-slate-dark: #22384a;
+  --da-slate-bright: #4a7196;
+  --da-emerald: #1e9e75;
+  --da-emerald-deep: #167a5a;
+  --da-ink: #17252a;
+  --da-border: rgba(23, 37, 42, 0.14);
+
+  /* Drive Material's primary (header/nav/footer) and accent (links/hover) */
+  --md-primary-fg-color: #34526b;
+  --md-primary-fg-color--light: #4a7196;
+  --md-primary-fg-color--dark: #22384a;
+  --md-accent-fg-color: #167a5a;
+}
+
+[data-md-color-scheme="slate"] {
+  --da-border: rgba(255, 255, 255, 0.16);
+  --md-primary-fg-color: #34526b;
+  --md-primary-fg-color--light: #4a7196;
+  --md-primary-fg-color--dark: #22384a;
+  --md-accent-fg-color: #34d399; /* brighter emerald reads better on dark */
+  --md-typeset-a-color: #34d399;
+}
+
+.md-header,
+.md-tabs {
+  box-shadow: none;
+}
+
+/* emerald hairline under the header/tabs for the two-tone look */
+.md-tabs {
+  border-bottom: 3px solid var(--da-emerald);
+}
+
+.md-header__title {
+  font-weight: 700;
+}
+
+.md-typeset h1,
+.md-typeset h2 {
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.md-typeset h1 {
+  margin-bottom: 0.9rem;
+  color: var(--da-slate);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: var(--da-emerald);
+}
+
+.md-typeset h2 {
+  border-bottom: 2px solid var(--da-emerald);
+  padding-bottom: 0.35rem;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--da-border);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--da-slate);
+  color: #fff;
+  font-weight: 700;
+}
+
+.md-typeset code {
+  border-radius: 0.25rem;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 0.45rem;
+}
+
+/* colored left rule on blockquotes for a little warmth */
+.md-typeset blockquote {
+  border-left: 0.2rem solid var(--da-emerald);
+}
+
+/* ── Home hero cards ──────────────────────────────────────────────────── */
+.da-hero-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  margin: 1.5rem 0 2rem;
+}
+
+.md-typeset .da-card {
+  align-items: center;
+  border: 1px solid var(--da-border);
+  border-left: 0.35rem solid var(--da-slate);
+  border-radius: 0.5rem;
+  color: var(--md-default-fg-color);
+  display: flex;
+  font-size: 1.05rem;
+  font-weight: 700;
+  gap: 0.55rem;
+  min-height: 5rem;
+  padding: 1rem;
+  text-decoration: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.md-typeset .da-card:hover {
+  border-color: var(--da-emerald);
+  box-shadow: 0 0.55rem 1.4rem rgba(34, 56, 74, 0.18);
+  transform: translateY(-2px);
+}
+
+.md-typeset .da-card-notes {
+  border-left-color: var(--da-slate);
+}
+
+.md-typeset .da-card-exercises {
+  border-left-color: var(--da-emerald-deep);
+}
+
+.md-typeset .da-card-quiz {
+  border-left-color: var(--da-slate-bright);
+}
+
+.md-typeset .da-card-projects {
+  border-left-color: var(--da-emerald);
+}
+
+.md-typeset .da-card-resources {
+  border-left-color: var(--da-slate-dark);
+}
+
+.md-nav__item .md-nav__link--active {
+  font-weight: 700;
+}
+
+.md-footer {
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 44.9375em) {
+  .da-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .md-typeset .da-card {
+    min-height: 4.25rem;
+  }
+}
