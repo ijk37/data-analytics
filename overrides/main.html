@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Data Analytics">
+  <meta property="og:title" content="{{ (page.meta.title or page.title or config.site_name) if page else config.site_name }}">
+  <meta property="og:description" content="{{ config.site_description }}">
+  {% if page %}
+  <meta property="og:url" content="{{ page.canonical_url }}">
+  {% endif %}
+  <meta property="og:image" content="https://ijk37.com/data-analytics/assets/images/og.png">
+  <meta property="og:image:alt" content="Data Analytics — Learn by doing. Eight modules, forty-two exercises, 120 quiz questions, and thirty-three labs.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ (page.meta.title or page.title or config.site_name) if page else config.site_name }}">
+  <meta name="twitter:description" content="{{ config.site_description }}">
+  <meta name="twitter:image" content="https://ijk37.com/data-analytics/assets/images/og.png">
+{% endblock %}

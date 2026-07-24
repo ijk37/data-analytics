@@ -8,11 +8,33 @@
 
 <img src="https://img.shields.io/badge/04_·_Projects-33_labs-1E9E75?style=for-the-badge&labelColor=167A5A" alt="Projects">
 
-[Home](../index.md) | [Notes](../01-notes/README.md) | [Exercises](../02-exercises/README.md) | [Quiz Hub](../03-quiz/) | [Resources](../05-resources/README.md)
+[Home](../index.md) | [Notes](../01-notes/README.md) | [Exercises](../02-exercises/README.md) | [Quiz Hub](../03-quiz/index.html) | [Resources](../05-resources/README.md)
 
 </div>
 
-Hands-on mini-projects and capstones, implemented from scratch in **Python** and **R** (no pandas/numpy/sklearn — see each project's README for conventions).
+Hands-on mini-projects and capstones in **Python** and **R**. Most core algorithms are implemented from scratch so their mechanics stay visible; the pattern-mining library lab also demonstrates `pandas`/`mlxtend` in Python and `arules` in R.
+
+## Choose a Starting Point
+
+| If you want to… | Start with | Why |
+| --- | --- | --- |
+| Run a first script with no extra packages | [Attribute Auditor](01-project-01/README.md) | Small, readable Python program with a built-in demo dataset |
+| Strengthen statistical reasoning | [Location & Dispersion Explorer](02-project-02/README.md) | Connects formulas to a complete descriptive report |
+| Practice a real cleaning workflow | [Data Quality Auditor](04-project-01/README.md) | Detects missing values, duplicates, and outliers before analysis |
+| Compare unsupervised methods | [Hierarchical & Density-Based Clustering](05-project-03/README.md) | Contrasts linkage-based clusters with DBSCAN noise handling |
+| Build a predictive workflow | [Model Evaluation](07-project-03/README.md) | Centers the confusion matrix, metrics, and cross-validation |
+| Create a portfolio case study | [Student Performance Predictor](08-project-05/README.md) | Combines preparation, exploration, modeling, and interpretation |
+
+## How to Work Through a Lab
+
+1. Read the project's **concept** and expected output before opening the code.
+2. Predict what the built-in dataset should reveal.
+3. Run the Python or R version and compare the result with your prediction.
+4. Change one assumption, parameter, or input column and explain what changes.
+5. Finish by writing a short conclusion: *What decision can this analysis support, and what can it not prove?*
+
+> [!NOTE]
+> The Python projects emphasize readable implementations of the underlying algorithms. They avoid pandas, NumPy, and scikit-learn except where a project explicitly compares the from-scratch approach with common library tooling.
 
 ## &#128736; Project Dashboard
 
@@ -93,12 +115,24 @@ Hands-on mini-projects and capstones, implemented from scratch in **Python** and
 
 | Tool | Used For |
 | --- | --- |
-| Python 3 | All projects — algorithms from scratch (stdlib only) |
+| Python 3 | All projects; standard library for most labs, with optional pandas/mlxtend in the library comparison |
 | R | Visualization, statistics, and library-based comparisons |
 | Excel | Formula walkthroughs for select exercises |
 
+## A Five-Project Portfolio Route
+
+For a compact but representative portfolio, complete these in order:
+
+1. [Location & Dispersion Explorer](02-project-02/README.md) — communicate a clear descriptive profile.
+2. [Data Quality Auditor](04-project-01/README.md) — document cleaning choices and their consequences.
+3. [K-Means Clustering](05-project-02/README.md) — explain feature scaling, initialization, and cluster selection.
+4. [Itemsets and Association Rules](06-project-01/README.md) — interpret support, confidence, and lift in context.
+5. [Comprehensive Course Capstone](08-project-07/README.md) — connect the full workflow in one defensible case study.
+
+Use the [learning toolkit](../05-resources/README.md) for setup, dataset preparation, and a project write-up checklist.
+
 <div align="center" markdown>
 
-[Back to repository home](../index.md)
+[Course home](../index.md) · [Start the first project](01-project-01/README.md)
 
 </div>

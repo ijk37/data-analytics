@@ -116,9 +116,10 @@ Each phase has sub-tasks (e.g., Data Preparation includes: Select, Clean, Constr
 
 ---
 
-## Mini Project Ideas (from Ch. 1 concepts)
+## Apply the Chapter
 
-> See `01-03-mini-projects/` folder
+Continue with the matching [Chapter 01 exercises](../02-exercises/01-exercise.md), take the [Chapter 01 quiz](../03-quiz/quiz.html?topic=01), or build one of these focused projects:
 
-1. **Attribute Auditor** (`attribute_audit.py`) — given any CSV, auto-classify each column's attribute type (nominal/ordinal/interval/ratio), flag discrete vs. continuous, and summarize statistics appropriate to each type.
-2. **Dataset Type Detector** (`dataset_type_explorer.py`) — classify an uploaded dataset as record, matrix, transaction, or document data and visualize its structure.
+1. **[Attribute Auditor](../04-projects/01-project-01/README.md)** — infer each column's likely measurement scale, flag discrete vs. continuous values, and report missingness.
+2. **[Dataset Type Explorer](../04-projects/01-project-02/README.md)** — classify a dataset as record, matrix, transaction, graph, or ordered data.
+3. **[Attribute Scale Exercises](../04-projects/01-project-03/README.md)** — solve the measurement-scale examples in both Python and R.

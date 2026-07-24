@@ -84,6 +84,11 @@ def fix_file(path: str) -> bool:
     s = s.replace("](../03-quiz/README.md)", "](../03-quiz/)")
     s = s.replace("](03-quiz/README.md)", "](03-quiz/)")
 
+    # Point directory-style quiz links at the app's real entry file. MkDocs
+    # treats the quiz as a static HTML app rather than a Markdown document.
+    s = s.replace("](../../03-quiz/)", "](../../03-quiz/index.html)")
+    s = s.replace("](../03-quiz/)", "](../03-quiz/index.html)")
+
     # root-home retarget (depth aware)
     if depth >= 2:
         s = s.replace("](../../README.md)", "](../../index.md)")

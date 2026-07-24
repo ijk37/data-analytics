@@ -15,6 +15,32 @@
       padding: 2rem 1rem;
     }
 
+    .course-nav {
+      align-items: center;
+      display: flex;
+      gap: 0.65rem;
+      justify-content: space-between;
+      margin: 0 auto 1rem;
+      max-width: 1000px;
+    }
+
+    .course-nav a {
+      color: #9fb3c1;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .course-nav a:hover,
+    .course-nav a:focus-visible {
+      color: #8FE0C4;
+    }
+
+    .course-nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
     header {
       text-align: center;
       max-width: 1000px;
@@ -109,19 +135,36 @@
       color: #475569;
       font-size: 0.85rem;
     }
+
+    @media (max-width: 560px) {
+      body { padding: 1rem; }
+      .course-nav { align-items: flex-start; flex-direction: column; }
+      .course-nav-links { flex-wrap: wrap; }
+      header { padding: 1.7rem 1rem; }
+      header h1 { font-size: 1.75rem; }
+    }
   </style>
 </head>
 <body>
 
+<nav class="course-nav" aria-label="Course navigation">
+  <a href="../index.html">← Data Analytics course</a>
+  <div class="course-nav-links">
+    <a href="../01-notes/index.html">Notes</a>
+    <a href="../02-exercises/index.html">Exercises</a>
+    <a href="../04-projects/index.html">Projects</a>
+  </div>
+</nav>
+
 <header>
   <div class="eyebrow">Data Analytics · Self-Paced Study</div>
   <h1>📊 Data Analytics Quiz Hub</h1>
-  <p>Pick a chapter and test yourself — a random subset per attempt</p>
+  <p>120 questions across 8 modules · 10 randomized questions per attempt</p>
 </header>
 
 <div class="grid" id="grid"></div>
 
-<footer>Random questions each attempt &nbsp;·&nbsp; Instant scoring &nbsp;·&nbsp; Review wrong answers &nbsp;·&nbsp; Retry re-draws a new set</footer>
+<footer>Random questions each attempt &nbsp;·&nbsp; Instant scoring &nbsp;·&nbsp; Answer explanations &nbsp;·&nbsp; Fresh set on retry</footer>
 
 <script src="data.js"></script>
 <script src="data-01.js"></script>

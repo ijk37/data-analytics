@@ -31,9 +31,9 @@
 | --- | --- | --- |
 | **01 Notes** | Chapter-by-chapter study notes | [Browse notes](01-notes/README.md) |
 | **02 Exercises** | Practice questions with worked answers, adapted from the course assignments | [Open exercises](02-exercises/README.md) |
-| **03 Quiz** | Interactive multiple-choice review quizzes | [Launch quiz hub](https://ijk37.com/data-analytics/03-quiz/) |
+| **03 Quiz** | 120-question interactive review bank with randomized attempts | [Launch quiz hub](https://ijk37.com/data-analytics/03-quiz/) |
 | **04 Projects** | 33 mini-projects and capstones in Python and R | [View projects](04-projects/README.md) |
-| **05 Resources** | Local-only lecture slides and assignment sources | [About resources](05-resources/README.md) |
+| **05 Toolkit** | Setup guidance, dataset preparation, references, and project checklist | [Open toolkit](05-resources/README.md) |
 
 ## Learning Path
 
@@ -56,7 +56,7 @@ data-analytics/
 ├── 02-exercises/        # 8 practice sets, worked Q&A
 ├── 03-quiz/             # Static quiz app (index.html + quiz.html)
 ├── 04-projects/         # 33 project folders across 8 modules
-└── 05-resources/        # Local-only lecture slides & assignment sources
+└── 05-resources/        # Public learning toolkit; source materials stay local-only
 ```
 
 ---
@@ -164,12 +164,12 @@ See the full dashboard (all 33 projects) in [`04-projects/README.md`](04-project
 
 ## Quiz Hub
 
-A self-contained, dependency-free quiz app (`03-quiz/`) with one starter question pool per chapter — random subset per attempt, instant scoring, and a full post-quiz review.
+A self-contained, dependency-free quiz app (`03-quiz/`) with 120 questions across eight chapter pools — random subset per attempt, instant scoring, answer explanations, and a full post-quiz review.
 
 | Feature | Details |
 | --- | --- |
 | Chapter coverage | 8 chapter quizzes + 1 mixed capstone review |
-| Question pool | ~15-20 starter questions per chapter (expandable) |
+| Question pool | 120 total questions across 8 chapter banks |
 | Attempt style | Randomized question subset and shuffled options |
 | Access | [Open the Quiz Hub](https://ijk37.com/data-analytics/03-quiz/) |
 
@@ -179,7 +179,7 @@ A self-contained, dependency-free quiz app (`03-quiz/`) with one starter questio
 
 | Language | Usage | Key Libraries |
 |----------|-------|--------------|
-| **Python** | All projects — algorithms from scratch | Pure stdlib (csv, math, collections, random) |
+| **Python** | Readable implementations of the course algorithms | Standard library for most labs; optional pandas/mlxtend comparison |
 | **R** | Visualization, statistics, libraries | ggplot2, corrplot, pheatmap, arules, rpart, e1071, class, caret |
 | **Excel** | Formulas and walkthroughs | COUNTIF, QUARTILE, CORREL, RANK.AVG, COVARIANCE.S |
 
@@ -187,7 +187,7 @@ A self-contained, dependency-free quiz app (`03-quiz/`) with one starter questio
 
 ## Python Project Conventions
 
-All Python files follow a consistent 8-section structure:
+Python files follow a consistent 8-section structure:
 
 ```
 Section 1: Imports
@@ -200,7 +200,7 @@ Section 7: File I/O  (includes standard load_csv)
 Section 8: Main
 ```
 
-- No external libraries (no pandas, no numpy, no sklearn)
+- Most labs use no external libraries; the pattern-mining library comparison optionally uses pandas and mlxtend
 - No lambda expressions — explicit for-loops throughout
 - ASCII-only output (runs on any terminal/encoding)
 - Each script can run standalone as a demo, or accept a CSV file as input

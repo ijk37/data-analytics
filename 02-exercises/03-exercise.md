@@ -6,7 +6,7 @@
 
 <img src="https://img.shields.io/badge/Chapter_03-Multivariate_Analysis-34526B?style=for-the-badge&labelColor=22384A" alt="Chapter 03: Multivariate Analysis"> <img src="https://img.shields.io/badge/8_questions-1E9E75?style=for-the-badge&labelColor=167A5A" alt="8 questions">
 
-[![Home](https://img.shields.io/badge/⌂_Home-22384A?style=flat-square)](../index.md) [![Notes](https://img.shields.io/badge/Notes-22384A?style=flat-square)](../01-notes/03-descriptive-multivariate-analysis.md) [![All Exercises](https://img.shields.io/badge/All_Exercises-22384A?style=flat-square)](README.md) [![Quiz](https://img.shields.io/badge/▶_Quiz-1E9E75?style=flat-square&labelColor=167A5A)](../03-quiz/)
+[![Home](https://img.shields.io/badge/⌂_Home-22384A?style=flat-square)](../index.md) [![Notes](https://img.shields.io/badge/Notes-22384A?style=flat-square)](../01-notes/03-descriptive-multivariate-analysis.md) [![All Exercises](https://img.shields.io/badge/All_Exercises-22384A?style=flat-square)](README.md) [![Quiz](https://img.shields.io/badge/▶_Quiz-1E9E75?style=flat-square&labelColor=167A5A)](../03-quiz/index.html)
 
 </div>
 

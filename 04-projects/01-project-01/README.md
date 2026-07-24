@@ -63,9 +63,9 @@ No external dependencies — pure Python 3 standard library only.
 | Discrete vs. continuous | `is_integer_valued()` check |
 | Missing value handling | counted and reported per column |
 
-## Known Issues
+## Implementation Status
 
-- `infer_attribute_type()` is **defined twice** — first stub (incomplete) then full implementation. Python silently uses the last definition; the stub should be removed.
+The script contains one complete `infer_attribute_type()` implementation and runs as a standalone demo or against a supplied CSV file.
 
 ## Limitations & Future Ideas
 
