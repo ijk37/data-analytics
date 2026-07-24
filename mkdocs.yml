@@ -64,9 +64,6 @@ theme:
     - navigation.instant
     - navigation.instant.prefetch
     - navigation.path
-    - navigation.sections
-    - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.top
     - search.highlight
     - search.share
