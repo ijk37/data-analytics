@@ -116,7 +116,7 @@
 <header>
   <div class="eyebrow">Data Analytics · Self-Paced Study</div>
   <h1>📊 Data Analytics Quiz Hub</h1>
-  <p>120 questions across 8 modules · 10 randomized questions per attempt</p>
+  <p>310 questions across 7 chapters · 20 or 25 randomized questions per chapter attempt</p>
 </header>
 
 <div class="grid" id="grid"></div>
@@ -131,12 +131,12 @@
 <script src="data-05.js"></script>
 <script src="data-06.js"></script>
 <script src="data-07.js"></script>
-<script src="data-08.js"></script>
+<script src="data-expansion.js"></script>
 <script>
   const ICONS = {
     "01": "🔤", "02": "📊", "03": "📈",
     "04": "🧹", "05": "🧩", "06": "🔗",
-    "07": "🌳", "08": "🏆",
+    "07": "🌳", "mixed-1": "🧩", "mixed-2": "🧠", "mixed-3": "🏆",
   };
 
   const grid = document.getElementById("grid");
@@ -159,7 +159,7 @@
       a.innerHTML = `
         <div class="card-icon">${ICONS[topic.id] || "📋"}</div>
         <div class="card-body">
-          <div class="topic-id">Chapter ${topic.id}</div>
+          <div class="topic-id">${MIXED_IDS.includes(topic.id) ? "All 7 Chapters" : `Chapter ${topic.id}`}</div>
           <div class="topic-title">${topic.title}</div>
           <div class="q-count">${countText}</div>
         </div>`;
@@ -167,7 +167,8 @@
     });
   }
 
-  renderCards(TOPICS, "Chapter Quizzes");
+  renderCards(TOPICS.filter(topic => !MIXED_IDS.includes(topic.id)), "Chapter Quizzes");
+  renderCards(TOPICS.filter(topic => MIXED_IDS.includes(topic.id)), "Mixed Practice");
 </script>
 </body>
 </html>

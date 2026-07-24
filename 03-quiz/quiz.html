@@ -379,7 +379,7 @@
   <!-- Quiz screen -->
   <div id="quiz">
     <div class="quiz-header">
-      <a class="back-btn" href="index.html">← All Chapters</a>
+      <a class="back-btn" href="index.html">← Quiz Hub</a>
       <span class="topic-label" id="topic-label"></span>
     </div>
 
@@ -416,7 +416,7 @@
   <!-- Results screen -->
   <div id="results">
     <div class="quiz-header">
-      <a class="back-btn" href="index.html">← All Chapters</a>
+      <a class="back-btn" href="index.html">← Quiz Hub</a>
       <span class="topic-label" id="results-label"></span>
     </div>
 
@@ -432,7 +432,7 @@
 
       <div class="result-actions">
         <button class="btn" onclick="restartQuiz()">↺ Retry</button>
-        <a class="btn-outline" href="index.html">All Chapters</a>
+        <a class="btn-outline" href="index.html">Quiz Hub</a>
       </div>
     </div>
   </div>
@@ -447,7 +447,7 @@
 <script src="data-05.js"></script>
 <script src="data-06.js"></script>
 <script src="data-07.js"></script>
-<script src="data-08.js"></script>
+<script src="data-expansion.js"></script>
 <script>
   // ── Init ──────────────────────────────────────────────────────────────────
   const params = new URLSearchParams(location.search);
@@ -486,6 +486,23 @@
 
   // Pick a fresh random subset from the full pool, options shuffled, per attempt.
   function pickQuestions() {
+    if (MIXED_IDS.includes(topicId)) {
+      const chapterIds = ["01", "02", "03", "04", "05", "06", "07"]
+        .sort(() => Math.random() - 0.5);
+      const baseCount = Math.floor(attemptSize / chapterIds.length);
+      const remainder = attemptSize % chapterIds.length;
+      const balanced = chapterIds.flatMap((chapterId, index) =>
+        questions
+          .filter(q => q.sourceChapter === chapterId)
+          .sort(() => Math.random() - 0.5)
+          .slice(0, baseCount + (index < remainder ? 1 : 0))
+      );
+
+      return balanced
+        .sort(() => Math.random() - 0.5)
+        .map(shuffleOptions);
+    }
+
     return [...questions]
       .sort(() => Math.random() - 0.5)
       .slice(0, attemptSize)

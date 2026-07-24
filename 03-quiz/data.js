@@ -1,12 +1,8 @@
 // ============================================================================
 //  Data Analytics Quiz Data
 //  data.js        →  TOPICS list + QUIZ_CONFIG + QUESTIONS scaffold
-//  data-01.js ... data-08.js  →  one starter question pool per chapter
-//
-//  This is a STARTER pool (~15-20 questions per chapter), not the full
-//  ~100-question-per-chapter depth of a mature question bank. Expand any
-//  chapter later by pushing more questions onto QUESTIONS["NN"] from a new
-//  data-NN-b.js file, loaded after data-NN.js in both index.html and quiz.html.
+//  data-01.js ... data-07.js  →  base question pools by chapter
+//  data-expansion.js          →  expanded banks and mixed-practice pools
 // ============================================================================
 
 const TOPICS = [
@@ -17,16 +13,31 @@ const TOPICS = [
   { id: "05", title: "Clustering" },
   { id: "06", title: "Frequent Pattern Mining" },
   { id: "07", title: "Classification" },
-  { id: "08", title: "Course Summary (Mixed)" },
+  { id: "mixed-1", title: "Mixed Practice — 50 Questions" },
+  { id: "mixed-2", title: "Mixed Practice — 75 Questions" },
+  { id: "mixed-3", title: "Mixed Practice — 100 Questions" },
 ];
+
+const MIXED_IDS = ["mixed-1", "mixed-2", "mixed-3"];
 
 // ── Quiz sizing ─────────────────────────────────────────────────────────────
 // Each attempt draws a RANDOM subset of this many questions from the topic
 // pool (re-picked on every retry). If a pool is smaller than the configured
 // size, the whole pool is used. Override per attempt with a ?n= URL parameter.
 const QUIZ_CONFIG = {
-  defaultAttempt: 10,   // random questions per attempt (starter pools are smaller than a mature bank)
-  attempt: {},          // per-topic overrides — add here once pools grow
+  defaultAttempt: 20,
+  attempt: {
+    "01": 20,
+    "02": 25,
+    "03": 20,
+    "04": 25,
+    "05": 20,
+    "06": 20,
+    "07": 25,
+    "mixed-1": 50,
+    "mixed-2": 75,
+    "mixed-3": 100,
+  },
 };
 
 // How many questions a given topic shows per attempt (capped at pool size).

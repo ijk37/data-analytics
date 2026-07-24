@@ -6,6 +6,6 @@
 
 [![Open the Quiz Hub](https://img.shields.io/badge/%E2%9C%85_Open_the_Quiz_Hub-1E9E75?style=for-the-badge&labelColor=167A5A)](https://ijk37.com/data-analytics/03-quiz/)
 
-<sub>The quiz app is static HTML/JS — <a href="03-quiz/index.html">open <code>03-quiz/index.html</code></a> directly, or use the live site link above.</sub>
+<sub>Choose from seven chapter quizzes (20 or 25 questions) or mixed practices of 50, 75, and 100 questions. The static HTML/JS app can also be opened directly from <a href="03-quiz/index.html"><code>03-quiz/index.html</code></a>.</sub>
 
 </div>

@@ -31,7 +31,7 @@
 | --- | --- | --- |
 | **01 Notes** | Chapter-by-chapter study notes | [Browse notes](01-notes/README.md) |
 | **02 Exercises** | Practice questions with worked answers, adapted from the course assignments | [Open exercises](02-exercises/README.md) |
-| **03 Quiz** | 120-question interactive review bank with randomized attempts | [Launch quiz hub](https://ijk37.com/data-analytics/03-quiz/) |
+| **03 Quiz** | 310-question interactive bank with chapter and mixed practice attempts | [Launch quiz hub](https://ijk37.com/data-analytics/03-quiz/) |
 | **04 Projects** | 33 mini-projects and capstones in Python and R | [View projects](04-projects/README.md) |
 | **05 Toolkit** | Setup guidance, dataset preparation, references, and project checklist | [Open toolkit](05-resources/README.md) |
 
@@ -164,12 +164,14 @@ See the full dashboard (all 33 projects) in [`04-projects/README.md`](04-project
 
 ## Quiz Hub
 
-A self-contained, dependency-free quiz app (`03-quiz/`) with 120 questions across eight chapter pools — random subset per attempt, instant scoring, answer explanations, and a full post-quiz review.
+A self-contained, dependency-free quiz app (`03-quiz/`) with 310 questions across seven chapter banks — random subsets per attempt, instant scoring, answer explanations, and a full post-quiz review.
 
 | Feature | Details |
 | --- | --- |
-| Chapter coverage | 8 chapter quizzes + 1 mixed capstone review |
-| Question pool | 120 total questions across 8 chapter banks |
+| Chapter coverage | 7 chapter quizzes + 3 mixed practices |
+| Question pool | 310 total questions: 40 or 50 per chapter |
+| Chapter attempts | 20 questions from 40-question banks; 25 from 50-question banks |
+| Mixed attempts | 50, 75, or 100 questions drawn from the combined Chapter 1–7 bank |
 | Attempt style | Randomized question subset and shuffled options |
 | Access | [Open the Quiz Hub](https://ijk37.com/data-analytics/03-quiz/) |
 
